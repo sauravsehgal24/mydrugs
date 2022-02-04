@@ -6,6 +6,8 @@
       v-bind:modalState="infoModalState"
       v-bind:drugData="infoDrugData"
       v-if="infoModalState"
+      @set-ratinginapp="setRating"
+      @handle-comment="addComment"
     />
     <b-container fluid>
       <b-row>
@@ -68,6 +70,63 @@ export default {
     ComputedUserCartItems() {},
   },
   methods: {
+    addComment: function (data) {
+      const { drugInfo, input } = data;
+      if (input.trim() === "") {
+        return;
+      }
+      // update drug inventory
+      let _drug = this.DrugInventoryItems.filter(
+        (d) => d.DrugId == drugInfo.DrugId
+      )[0];
+      let userDrugs;
+      if (this.UserCartItems.length !== 0) {
+        userDrugs = this.UserCartItems.filter(
+          (d) => d.DrugId == drugInfo.DrugId
+        );
+      }
+      _drug.Comments = [..._drug.Comments, input];
+      for (var i = 0; i < this.DrugInventoryItems.length; i++) {
+        if (this.DrugInventoryItems[i].DrugId === _drug.DrugId) {
+          this.DrugInventoryItems[i] = _drug;
+          break;
+        }
+      }
+      if (userDrugs.length !== 0) {
+        // update userInventory
+        for (var d = 0; d < userDrugs.length; d++) {
+          userDrugs[d].Comments = [...userDrugs[d].Comments, input];
+        }
+        const cartNums = userDrugs.map((d) => d.cartNumber);
+        for (var i = 0; i < this.UserCartItems.length; i++) {
+          if (cartNums.includes(this.UserCartItems[i].cartNumber)) {
+            this.UserCartItems[i] = userDrugs.filter(
+              (d) => d.cartNumber === this.UserCartItems[i].cartNumber
+            )[0];
+          }
+        }
+      }
+    },
+    setRating: function (data) {
+      const { starDt, type, drug } = data;
+      //find that drug
+      let _drug = this.DrugInventoryItems.filter(
+        (d) => d.DrugId == drug.DrugId
+      )[0];
+      const prevAvg = _drug.Ratings[type].val;
+      const prevCount = _drug.Ratings[type].totalRatings;
+      const newCount = prevCount + 1;
+      const prevSum = prevAvg * prevCount;
+      let newAvg = (prevSum + starDt.id) / newCount;
+      newAvg = newAvg.toFixed(1);
+      _drug.Ratings[type].val = newAvg;
+      _drug.Ratings[type].totalRatings = newCount;
+      for (var i = 0; i < this.DrugInventoryItems.lengthl; i++) {
+        if (this.DrugInventoryItems[i].DrugId === _drug.DrugId) {
+          this.DrugInventoryItems[i] = _drug;
+        }
+      }
+    },
     supplySearchInput: function ($event) {
       this.searchTextSupply = $event;
     },
@@ -85,7 +144,6 @@ export default {
       }
     },
     displayDrugInfo: function (data) {
-      console.log(data);
       this.infoModalState = true;
       this.infoDrugData = data;
     },

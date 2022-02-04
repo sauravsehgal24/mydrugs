@@ -40,6 +40,7 @@ export default {
       this.$emit("supply-drugaction", drugData);
     },
     openDrugInfoModal: function (drugInfo) {
+      console.log(drugInfo.Comments);
       this.$emit("supply-infostate", drugInfo);
     },
   },

@@ -4,8 +4,14 @@ export default {
       DrugId: 1,
       DrugName: "amiodarone",
       Ratings: {
-        sideEffectsNumber: 3,
-        efectiveness: 4,
+        sideEffectsNumber: {
+          val: 3,
+          totalRatings: 3,
+        },
+        effectiveness: {
+          val: 4,
+          totalRatings: 4,
+        },
       },
       Comments: [
         "I will recommend this!",
@@ -16,8 +22,14 @@ export default {
       DrugId: 2,
       DrugName: "cholestyramine",
       Ratings: {
-        sideEffectsNumber: 0,
-        efectiveness: 0,
+        sideEffectsNumber: {
+          val: 0,
+          totalRatings: 0,
+        },
+        effectiveness: {
+          val: 0,
+          totalRatings: 0,
+        },
       },
       Comments: [],
     },
@@ -25,8 +37,14 @@ export default {
       DrugId: 3,
       DrugName: "bicalutamide",
       Ratings: {
-        sideEffectsNumber: 0,
-        efectiveness: 3,
+        sideEffectsNumber: {
+          val: 0,
+          totalRatings: 0,
+        },
+        effectiveness: {
+          val: 3,
+          totalRatings: 3,
+        },
       },
       Comments: ["VEry less side effects"],
     },
@@ -34,8 +52,14 @@ export default {
       DrugId: 4,
       DrugName: "digoxin",
       Ratings: {
-        sideEffectsNumber: 3.3,
-        efectiveness: 4,
+        sideEffectsNumber: {
+          val: 0,
+          totalRatings: 0,
+        },
+        effectiveness: {
+          val: 0,
+          totalRatings: 0,
+        },
       },
       Comments: ["Do not recommend this"],
     },
@@ -43,8 +67,14 @@ export default {
       DrugId: 5,
       DrugName: "fenofibrate",
       Ratings: {
-        sideEffectsNumber: 1.1,
-        efectiveness: 2,
+        sideEffectsNumber: {
+          val: 0,
+          totalRatings: 0,
+        },
+        effectiveness: {
+          val: 0,
+          totalRatings: 0,
+        },
       },
       Comments: [
         "Not very good and bad either",
@@ -56,8 +86,14 @@ export default {
       DrugId: 6,
       DrugName: "doxazosin",
       Ratings: {
-        sideEffectsNumber: 3,
-        efectiveness: 1,
+        sideEffectsNumber: {
+          val: 0,
+          totalRatings: 0,
+        },
+        effectiveness: {
+          val: 0,
+          totalRatings: 0,
+        },
       },
       Comments: ["I will recommend this!"],
     },
@@ -65,8 +101,14 @@ export default {
       DrugId: 7,
       DrugName: "midodrine",
       Ratings: {
-        sideEffectsNumber: 0,
-        efectiveness: 0,
+        sideEffectsNumber: {
+          val: 0,
+          totalRatings: 0,
+        },
+        effectiveness: {
+          val: 0,
+          totalRatings: 0,
+        },
       },
       Comments: [],
     },
@@ -74,8 +116,14 @@ export default {
       DrugId: 8,
       DrugName: "loperamide",
       Ratings: {
-        sideEffectsNumber: 1,
-        efectiveness: 1,
+        sideEffectsNumber: {
+          val: 1,
+          totalRatings: 1,
+        },
+        effectiveness: {
+          val: 1,
+          totalRatings: 1,
+        },
       },
       Comments: ["good for some people"],
     },
