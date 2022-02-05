@@ -19,6 +19,7 @@
             v-bind:searchText="searchTextSupply"
             @handle-drugtransaction="handleDrugTransaction"
             @handle-druginfostate="displayDrugInfo"
+            @handle-sort="handleSort"
           />
         </b-col>
         <b-col xl="6" l="6" md="12" sm="12" class="inventoryContainer">
@@ -28,6 +29,7 @@
             title="My Cart"
             @handle-drugtransaction="handleDrugTransaction"
             @handle-druginfostate="displayDrugInfo"
+            @handle-sort="handleSort"
           />
         </b-col>
       </b-row>
@@ -70,6 +72,11 @@ export default {
     ComputedUserCartItems() {},
   },
   methods: {
+    handleSort: function (type) {
+      this.DrugInventoryItems = this.DrugInventoryItems.sort(
+        (a, b) => b.Ratings[type].val - a.Ratings[type].val
+      );
+    },
     addComment: function (data) {
       const { drugInfo, input } = data;
       if (input.trim() === "") {
@@ -157,6 +164,11 @@ export default {
 }
 .inventoryContainer {
   padding: 3%;
-  height: 400px;
+  height: 600px;
+  overflow-y: scroll;
+}
+::-webkit-scrollbar {
+  width: 0; /* Remove scrollbar space */
+  background: transparent; /* Optional: just make scrollbar invisible */
 }
 </style>

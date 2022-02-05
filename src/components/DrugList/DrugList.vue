@@ -3,9 +3,18 @@
     <b-card>
       <b-card-text style="display: inline; font-size: 20px"
         ><strong>{{ title }}</strong>
-        <b-dropdown id="dropdown-1" text="Sort By" style="float: right">
-          <b-dropdown-item>Effectiveness</b-dropdown-item>
-          <b-dropdown-item>SIde Effects Rating</b-dropdown-item>
+        <b-dropdown
+          id="dropdown-1"
+          text="Sort By"
+          style="float: right"
+          v-show="isInventoryCard"
+        >
+          <b-dropdown-item v-on:click="handleSort('effectiveness')"
+            >Effectiveness</b-dropdown-item
+          >
+          <b-dropdown-item v-on:click="handleSort('sideEffectsNumber')"
+            >Side Effects Rating</b-dropdown-item
+          >
         </b-dropdown>
       </b-card-text>
     </b-card>
@@ -40,6 +49,9 @@ export default {
     },
     supplyDrugModalUp: function (data) {
       this.$emit("handle-druginfostate", data);
+    },
+    handleSort: function (type) {
+      this.$emit("handle-sort", type);
     },
   },
   components: {
